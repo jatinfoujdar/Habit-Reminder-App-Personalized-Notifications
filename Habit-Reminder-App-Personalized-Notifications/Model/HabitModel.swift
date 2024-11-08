@@ -8,3 +8,7 @@ struct HabitModel : Identifiable{
         var completionStreak: Int
         var missedDays: Int
 }
+
+enum NotificationType {
+    case basic, motivational, congratulatory
+}
