@@ -3,7 +3,7 @@ import SwiftUI
 struct HabitView: View {
     @State private var habit = ""
     @State private var reminderDate = Date()
-    @State private var savedHabits: [String] = [] 
+    @State private var savedHabits: [String] = []
 
     var body: some View {
         VStack(spacing: 20) {
@@ -53,6 +53,7 @@ struct HabitView: View {
             }
         }
         .padding()
+        Spacer()
     }
 }
 
