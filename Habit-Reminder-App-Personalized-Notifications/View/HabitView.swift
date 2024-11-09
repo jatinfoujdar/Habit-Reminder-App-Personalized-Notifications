@@ -10,6 +10,7 @@ import SwiftUI
 struct HabitView: View {
     @State private var habit = ""
     @State private var reminderDate = Date()
+    @State private var savedHabit = ""
     var body: some View {
         VStack(spacing: 20){
             Text("Habit Reminder")
@@ -22,7 +23,7 @@ struct HabitView: View {
                 .padding(.horizontal)
             
             DatePicker("Set Reminder Date", selection: $reminderDate,    displayedComponents: [.date, .hourAndMinute])
-                            .datePickerStyle(GraphicalDatePickerStyle())
+                            .datePickerStyle(DefaultDatePickerStyle())
                             .padding(.horizontal)
             Button(action: {
                             // Save habit logic here
