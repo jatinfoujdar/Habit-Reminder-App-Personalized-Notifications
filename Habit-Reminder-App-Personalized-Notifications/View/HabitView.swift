@@ -21,7 +21,7 @@ struct HabitView: View {
                 .cornerRadius(8)
                 .padding(.horizontal)
             
-            DatePicker("Set Reminder Date", selection: $reminderDate, displayedComponents: .date)
+            DatePicker("Set Reminder Date", selection: $reminderDate,    displayedComponents: [.date, .hourAndMinute])
                             .datePickerStyle(GraphicalDatePickerStyle())
                             .padding(.horizontal)
             Button(action: {
