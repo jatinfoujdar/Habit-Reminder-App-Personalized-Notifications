@@ -43,7 +43,7 @@ struct HabitView: View {
                         .background(Color.white.opacity(0.8))
                         .cornerRadius(8)
                         .shadow(radius: 3)
-                    
+                        .padding()
                     Button(action: {
                         if !habit.isEmpty {
                             let newHabit = HabitModel(name: habit, reminderTime: reminderDate, completionStreak: 0, missedDays: 0)
