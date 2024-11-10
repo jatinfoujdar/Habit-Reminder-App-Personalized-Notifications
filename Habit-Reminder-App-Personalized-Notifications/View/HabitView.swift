@@ -7,60 +7,93 @@ struct HabitView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 20) {
-                                
-                TextField("Enter habit", text: $habit)
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(8)
-                    .padding(.horizontal)
+            ZStack {
+               
+                LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.3), Color.purple.opacity(0.3)]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                    .ignoresSafeArea()
                 
-                DatePicker("Set Reminder Date", selection: $reminderDate, displayedComponents: [.date, .hourAndMinute])
-                    .datePickerStyle(DefaultDatePickerStyle())
-                    .padding(.horizontal)
+               
+                Circle()
+                    .fill(Color.blue.opacity(0.1))
+                    .frame(width: 200, height: 200)
+                    .position(x: 50, y: 100)
                 
-                Button(action: {
-                    if !habit.isEmpty {
-                        let newHabit = HabitModel(name: habit, reminderTime: reminderDate, completionStreak: 0, missedDays: 0)
-                        savedHabits.append(newHabit)
-                        habit = ""
-                    }
-                }) {
-                    Text("Save Habit")
-                        .fontWeight(.semibold)
+                Circle()
+                    .fill(Color.purple.opacity(0.1))
+                    .frame(width: 150, height: 150)
+                    .position(x: 300, y: 400)
+                
+                VStack(spacing: 20) {
+                    Text("Habit Tracker")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.blue.opacity(0.8))
+                        .padding(.top)
+                    
+                    TextField("Enter habit", text: $habit)
                         .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
+                        .background(Color.white.opacity(0.9))
+                        .cornerRadius(12)
+                        .shadow(radius: 4)
                         .padding(.horizontal)
-                }
-                
-                if !savedHabits.isEmpty {
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("Saved Habits:")
-                            .font(.headline)
-                        
-                        ForEach(savedHabits) { habit in
-                            NavigationLink(destination: HabitDetailed(habit: habit)) {
-                                VStack(alignment: .leading) {
-                                    Text("- \(habit.name)")
-                                        .font(.subheadline)
-                                    Text("Reminder: \(habit.reminderTime, style: .time)")
-                                        .font(.caption)
-                                        .foregroundColor(.gray)
+                    
+                    DatePicker("Set Reminder Date", selection: $reminderDate, displayedComponents: [.date, .hourAndMinute])
+                        .datePickerStyle(CompactDatePickerStyle())
+                        .padding(.horizontal)
+                        .background(Color.white.opacity(0.8))
+                        .cornerRadius(8)
+                        .shadow(radius: 3)
+                    
+                    Button(action: {
+                        if !habit.isEmpty {
+                            let newHabit = HabitModel(name: habit, reminderTime: reminderDate, completionStreak: 0, missedDays: 0)
+                            savedHabits.append(newHabit)
+                            habit = ""
+                        }
+                    }) {
+                        Text("Save Habit")
+                            .fontWeight(.semibold)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                            .padding(.horizontal)
+                    }
+                    
+                    if !savedHabits.isEmpty {
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text("Saved Habits:")
+                                .font(.headline)
+                                .foregroundColor(Color.blue.opacity(0.7))
+                            
+                            ForEach(savedHabits) { habit in
+                                NavigationLink(destination: HabitDetailed(habit: habit)) {
+                                    VStack(alignment: .leading) {
+                                        Text("- \(habit.name)")
+                                            .font(.subheadline)
+                                            .foregroundColor(.primary)
+                                        Text("Reminder: \(habit.reminderTime, style: .time)")
+                                            .font(.caption)
+                                            .foregroundColor(.gray)
+                                    }
+                                    .padding()
+                                    .background(Color.white.opacity(0.8))
+                                    .cornerRadius(8)
+                                    .shadow(radius: 2)
                                 }
-                                .padding(.vertical, 5)
+                                .buttonStyle(PlainButtonStyle())
                             }
-                            .buttonStyle(PlainButtonStyle())
                         }
                         .padding(.top, 20)
                     }
+                    
+                    Spacer()
                 }
-                
-                Spacer()
+                .padding()
             }
-            .navigationTitle("Habit Tracker")
+            .navigationTitle("")
+            .navigationBarHidden(true)
         }
     }
 }
