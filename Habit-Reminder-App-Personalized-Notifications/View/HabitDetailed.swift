@@ -1,15 +1,18 @@
 import SwiftUI
 
 struct HabitDetailed: View {
-    var habit: HabitModel
+    @State private var habit: HabitModel
+    
+    init(habit: HabitModel) {
+        _habit = State(initialValue: habit)
+    }
     
     var body: some View {
         ZStack {
-       
+        
             LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.3), Color.purple.opacity(0.3)]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .ignoresSafeArea()
             
-         
             Circle()
                 .fill(Color.blue.opacity(0.1))
                 .frame(width: 200, height: 200)
@@ -21,7 +24,7 @@ struct HabitDetailed: View {
                 .position(x: 300, y: 400)
             
             VStack(spacing: 30) {
-                
+        
                 Text(habit.name)
                     .font(.largeTitle)
                     .fontWeight(.bold)
@@ -31,17 +34,22 @@ struct HabitDetailed: View {
                     .cornerRadius(10)
                     .shadow(radius: 4)
                 
-            
+              
                 VStack(spacing: 15) {
-                    Text("Reminder:")
+                    Text("Set Reminder:")
                         .font(.headline)
                         .foregroundColor(Color.gray)
-                    Text(habit.reminderTime, style: .time)
-                        .font(.title)
-                        .fontWeight(.medium)
-                        .foregroundColor(Color.blue)
+                    
+                    DatePicker("Reminder Time", selection: $habit.reminderTime, displayedComponents: [.date, .hourAndMinute])
+                        .datePickerStyle(GraphicalDatePickerStyle())
+                        .accentColor(Color.blue)
+                        .padding()
+                        .background(Color.white.opacity(0.85))
+                        .cornerRadius(10)
+                        .shadow(radius: 3)
                     
                     Divider().padding(.vertical, 10)
+                    
                     
                     Text("Completion Streak: \(habit.completionStreak)")
                         .font(.title2)
