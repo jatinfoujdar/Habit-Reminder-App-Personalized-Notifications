@@ -44,20 +44,25 @@ struct HabitDetailed: View {
                         .datePickerStyle(GraphicalDatePickerStyle())
                         .accentColor(Color.blue)
                         .padding()
-                        .background(Color.white.opacity(0.85))
+                        .background(
+                            LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.6), Color.purple.opacity(0.6)]), startPoint: .top, endPoint: .bottom)
+                        )
                         .cornerRadius(10)
                         .shadow(radius: 3)
                     
                     Divider().padding(.vertical, 10)
                     
                     
-                    Text("Completion Streak: \(habit.completionStreak)")
-                        .font(.title2)
-                        .foregroundColor(Color.green.opacity(0.8))
-                    
-                    Text("Missed Days: \(habit.missedDays)")
+                    HStack {
+                        Text("This Streak: \(habit.completionStreak)")
+                            .font(.title2)
+                            .foregroundColor(Color.green.opacity(0.8))
+                  
+                        Spacer()
+                    Text("Longest Streak: \(habit.missedDays)")
                         .font(.title2)
                         .foregroundColor(Color.red.opacity(0.8))
+                    }
                 }
                 .padding()
                 .background(Color.white.opacity(0.85))
