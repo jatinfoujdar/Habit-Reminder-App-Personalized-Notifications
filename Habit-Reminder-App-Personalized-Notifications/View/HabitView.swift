@@ -8,11 +8,11 @@ struct HabitView: View {
     var body: some View {
         NavigationView {
             ZStack {
-               
+                
                 LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.3), Color.purple.opacity(0.3)]), startPoint: .topLeading, endPoint: .bottomTrailing)
                     .ignoresSafeArea()
                 
-               
+                
                 Circle()
                     .fill(Color.blue.opacity(0.1))
                     .frame(width: 200, height: 200)
@@ -61,42 +61,18 @@ struct HabitView: View {
                             .padding(.horizontal)
                     }
                     
-                    if !savedHabits.isEmpty {
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text("Saved Habits:")
-                                .font(.headline)
-                                .foregroundColor(Color.blue.opacity(0.7))
-                            
-                            ForEach(savedHabits) { habit in
-                                NavigationLink(destination: HabitDetailed(habit: habit)) {
-                                    VStack(alignment: .leading) {
-                                        Text("- \(habit.name)")
-                                            .font(.subheadline)
-                                            .foregroundColor(.primary)
-                                        Text("Reminder: \(habit.reminderTime, style: .time)")
-                                            .font(.caption)
-                                            .foregroundColor(.gray)
-                                    }
-                                    .padding()
-                                    .background(Color.white.opacity(0.8))
-                                    .cornerRadius(8)
-                                    .shadow(radius: 2)
-                                }
-                                .buttonStyle(PlainButtonStyle())
-                            }
-                        }
-                        .padding(.top, 20)
-                    }
-                    
-                    Spacer()
+                    SavedBar(savedHabits: $savedHabits)
                 }
-                .padding()
+                
+                Spacer()
+                
+       .padding()
             }
             .navigationTitle("")
             .navigationBarHidden(true)
         }
     }
-}
+    }
 
 #Preview {
     HabitView()
