@@ -6,18 +6,7 @@ struct SavedBar: View {
        
        var body: some View {
            VStack {
-               HStack {
-                   Text("Saved Habits")
-                       .font(.headline)
-                       .foregroundColor(.white)
-                   Spacer()
-               }
-               .padding()
-               .background(Color.blue)
-               .cornerRadius(10)
-               .shadow(radius: 4)
-
-              
+                            
                if !savedHabits.isEmpty {
                    VStack(alignment: .leading, spacing: 10) {
                        ForEach(savedHabits) { habit in

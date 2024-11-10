@@ -8,11 +8,11 @@ struct HabitView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                
+            
                 LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.3), Color.purple.opacity(0.3)]), startPoint: .topLeading, endPoint: .bottomTrailing)
                     .ignoresSafeArea()
                 
-                
+               
                 Circle()
                     .fill(Color.blue.opacity(0.1))
                     .frame(width: 200, height: 200)
@@ -23,6 +23,7 @@ struct HabitView: View {
                     .frame(width: 150, height: 150)
                     .position(x: 300, y: 400)
                 
+              
                 VStack(spacing: 20) {
                     Text("Habit Tracker")
                         .font(.largeTitle)
@@ -44,6 +45,7 @@ struct HabitView: View {
                         .cornerRadius(8)
                         .shadow(radius: 3)
                         .padding()
+                    
                     Button(action: {
                         if !habit.isEmpty {
                             let newHabit = HabitModel(name: habit, reminderTime: reminderDate, completionStreak: 0, missedDays: 0)
@@ -62,17 +64,16 @@ struct HabitView: View {
                     }
                     
                     SavedBar(savedHabits: $savedHabits)
+                    
+                    Spacer() 
                 }
-                
-                Spacer()
-                
-       .padding()
+                .padding()
             }
             .navigationTitle("")
             .navigationBarHidden(true)
         }
     }
-    }
+}
 
 #Preview {
     HabitView()
